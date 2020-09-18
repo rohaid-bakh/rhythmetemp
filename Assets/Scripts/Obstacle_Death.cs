@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Hosting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Obstacle_Death : MonoBehaviour
 {
+    AudioSource audioSource;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -13,8 +15,12 @@ public class Obstacle_Death : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        audioSource.Play();
-        ApplicationActivator.LoadLevel(ApplicationActivator.loadedLevel);
+        if (collision.gameObject.tag == "Death")
+        {
+            audioSource.Play();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        
     }
 
 
